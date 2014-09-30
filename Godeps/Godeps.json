@@ -1,0 +1,36 @@
+{
+	"ImportPath": "manu-blah",
+	"GoVersion": "go1.2.1",
+	"Deps": [
+		{
+			"ImportPath": "github.com/codegangsta/inject",
+			"Comment": "v1.0-rc1-4-g4b81725",
+			"Rev": "4b8172520a03fa190f427bbd284db01b459bfce7"
+		},
+		{
+			"ImportPath": "github.com/codegangsta/martini",
+			"Comment": "v1.0-47-g9c8b84a",
+			"Rev": "9c8b84a170f5fe2352ae698a85cd5eb66b38a290"
+		},
+		{
+			"ImportPath": "github.com/codegangsta/martini-contrib/binding",
+			"Comment": "v0.1-159-g8ce6181",
+			"Rev": "8ce6181c2609699e4c7cd30994b76a850a9cdadc"
+		},
+		{
+			"ImportPath": "github.com/codegangsta/martini-contrib/render",
+			"Comment": "v0.1-159-g8ce6181",
+			"Rev": "8ce6181c2609699e4c7cd30994b76a850a9cdadc"
+		},
+		{
+			"ImportPath": "github.com/coopernurse/gorp",
+			"Comment": "v1.7",
+			"Rev": "5d19ebd22fdcf3b9fb1c8cbfcf1d4e78e102f1e0"
+		},
+		{
+			"ImportPath": "github.com/go-sql-driver/mysql",
+			"Comment": "v1.2-26-g9543750",
+			"Rev": "9543750295406ef070f7de8ae9c43ccddd44e15e"
+		}
+	]
+}
