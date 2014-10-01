@@ -1,1 +1,1 @@
-web: manu-blah
+web: cf-example-go-lalala
