@@ -1,9 +1,8 @@
 ---
 applications:
-- name: go-sample
+- name: cf-example-go
   memory: 128M
   instances: 1
-#  host: go-sample
   path: .
   env:
     DB_USERNAME: bda5522cb9fa9e
@@ -11,4 +10,3 @@ applications:
     DB_HOST: us-cdbr-iron-east-01.cleardb.net
     DB_PORT: 3306
     DB_DATABASE: ad_4265d05d0278e5f
-#  buildpack: https://github.com/cloudfoundry/buildpack-go.git
