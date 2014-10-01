@@ -38,12 +38,7 @@ func main() {
 
   fmt.Println("listening...")
   err := http.ListenAndServe(":"+os.Getenv("PORT"), m)
-  if err != nil {
-    panic(err)
-  }
-  // log.Print("listening on " + "0.0.0.0:" + os.Getenv("PORT"))
-	// m.RunOnAddr("0.0.0.0:" + os.Getenv("PORT"))
-	// log.Fatal(http.ListenAndServe("0.0.0.0:" + os.Getenv("PORT"), m))
+  PanicIf(err)
 }
 
 func NewBooks(r render.Render) {
