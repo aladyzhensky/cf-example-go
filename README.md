@@ -1,4 +1,8 @@
-sampleapp
-=========
+Very simple and stupid Book management app
+====
 
-Sample GoLang App with Martini, Render, Binding, and GORM with MySQL
+### Components
+* Martini Web Framework (github.com/go-martini/martini)
+* Martini Render (github.com/martini-contrib/render)
+* GORM (github.com/coopernurse/gorp)
+* MySQL

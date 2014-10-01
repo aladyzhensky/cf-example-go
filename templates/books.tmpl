@@ -1,0 +1,20 @@
+<h2>My Library</h2>
+<ol class="breadcrumb">  
+  <li class="active">Home</li>
+</ol>
+<table class="table">
+  <tr>
+    <th>Title</th>
+    <th>Author</th>
+    <th>Description</th>
+  </tr>
+{{ range . }}
+  <tr>
+    <td>{{.Title}}</td>
+    <td>{{.Author}}</td>
+    <td>{{.Description}}</td>
+  </tr>
+{{ end }}
+</table>
+
+<a href="/create" class="btn btn-default"><i class="glyphicon glyphicon-plus"></i> Create</a>
