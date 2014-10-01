@@ -1,5 +1,5 @@
 {
-	"ImportPath": "manu/manu-go-cf",
+	"ImportPath": "manu/cf-example-go",
 	"GoVersion": "go1.2.1",
 	"Deps": [
 		{
