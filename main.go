@@ -12,7 +12,8 @@ import (
 
 	"os"
 	"log"
-  "fmt"
+        "fmt"
+        "encoding/json"
 )
 
 type Book struct {
@@ -20,6 +21,14 @@ type Book struct {
 	Title       string
 	Author      string
 	Description string
+}
+
+type ClearDBInfo struct {
+    Credentials ClearDBCredentials `json:"credentials"`
+}
+ 
+type ClearDBCredentials struct {
+    Uri     string `json:"uri"`
 }
 
 func main() {
@@ -64,9 +73,34 @@ func ShowBooks(ren render.Render, r *http.Request, dbmap *gorp.DbMap) {
 	ren.HTML(200, "books", books_raws)
 }
 
+func dbcredentials() (DB_URI string, err error){
+    s := os.Getenv("VCAP_SERVICES")
+        services := make(map[string][]ClearDBInfo)
+        err = json.Unmarshal([]byte(s), &services)
+        if err != nil {
+            log.Printf("Error parsing MySQL connection information: %v\n", err.Error())
+            return
+        }
+     
+        info := services["cleardb"]
+        if len(info) == 0 {
+            log.Printf("No ClearDB databases are bound to this application.\n")
+            return
+        }
+     
+        // Assumes only a single ClearDB is bound to this application
+        creds := info[0].Credentials
+     
+        DB_URI = creds.Uri
+        return
+}
+
+
 func initDb() *gorp.DbMap {
+    DB_URI, err := dbcredentials()
     // db, err := sql.Open("mysql", "root:@/go_sample")
-	  db, err := sql.Open("mysql", os.Getenv("DB_URL"))
+	//  db, err := sql.Open("mysql", os.Getenv("DB_URL"))
+	  db, err := sql.Open("mysql", DB_URI)
     PanicIf(err)
 
     dbmap := &gorp.DbMap{Db: db, Dialect: gorp.MySQLDialect{"InnoDB", "UTF8"}}

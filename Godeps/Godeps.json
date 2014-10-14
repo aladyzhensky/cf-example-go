@@ -1,5 +1,5 @@
 {
-	"ImportPath": "manu/cf-example-go",
+	"ImportPath": "github.com/mgarciap/cf-example-go",
 	"GoVersion": "go1.2.1",
 	"Deps": [
 		{
