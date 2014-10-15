@@ -1,1 +1,1 @@
-web: cf-example-go
+web: go-sample-cf
