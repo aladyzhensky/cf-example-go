@@ -100,12 +100,16 @@ func main() {
 func initDb() *gorp.DbMap {
         DB_URI, err := dbcredentials()
 
-        re := regexp.MustCompile("mysql://")
-        rr := re.ReplaceAllLiteralString(DB_URI, "")
+        ra := regexp.MustCompile("mysql://")
+        rb := ra.ReplaceAllLiteralString(DB_URI, "")
         rc := regexp.MustCompile("\\?reconnect=true")
-        rx := rc.ReplaceAllLiteralString(rr, "")
-        ry := regexp.MustCompile(":3306")
-        DB_URL := ry.ReplaceAllLiteralString(rx, "")
+        rd := rc.ReplaceAllLiteralString(rb, "")
+        re := regexp.MustCompile(":3306")
+        rf := re.ReplaceAllLiteralString(rd, ":3306)")
+        rg := regexp.MustCompile("@")
+        DB_URL := rg.ReplaceAllLiteralString(rf, "@tcp(")
+
+    fmt.Printf(DB_URL)
 
 	db, err := sql.Open("mysql", DB_URL)
     PanicIf(err)
