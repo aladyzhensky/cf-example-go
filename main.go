@@ -46,72 +46,68 @@ func main() {
 	m.Post("/books", CreateBook)
 	m.Get("/create", NewBooks)
 
-  fmt.Println("listening...")
-  err := http.ListenAndServe(":"+os.Getenv("PORT"), m)
-  PanicIf(err)
-}
+      fmt.Println("listening...")
+      err := http.ListenAndServe(":"+os.Getenv("PORT"), m)
+      PanicIf(err)
+    }
 
-func NewBooks(r render.Render) {
-	r.HTML(200, "create", nil)
-}
+    func NewBooks(r render.Render) {
+        r.HTML(200, "create", nil)
+    }
 
-func CreateBook(ren render.Render, r *http.Request, dbmap *gorp.DbMap) {
-  new_book := Book{
-  							Title: r.FormValue("title"), 
-  							Author: r.FormValue("author"),
-  						  Description: r.FormValue("description")}
-  err := dbmap.Insert(&new_book)						
+    func CreateBook(ren render.Render, r *http.Request, dbmap *gorp.DbMap) {
+      new_book := Book{
+                                Title: r.FormValue("title"), 
+                                Author: r.FormValue("author"),
+                              Description: r.FormValue("description")}
+      err := dbmap.Insert(&new_book)						
 
-	PanicIf(err)
-	ren.Redirect("/")
-}
+        PanicIf(err)
+        ren.Redirect("/")
+    }
 
-func ShowBooks(ren render.Render, r *http.Request, dbmap *gorp.DbMap) {
-	var books_raws []Book
-  _, err := dbmap.Select(&books_raws, "select * from books order by book_id")
-  PanicIf(err)
+    func ShowBooks(ren render.Render, r *http.Request, dbmap *gorp.DbMap) {
+        var books_raws []Book
+      _, err := dbmap.Select(&books_raws, "select * from books order by book_id")
+      PanicIf(err)
 
-	ren.HTML(200, "books", books_raws)
-}
+        ren.HTML(200, "books", books_raws)
+    }
 
-func dbcredentials() (DB_URI string, err error){
-    s := os.Getenv("VCAP_SERVICES")
-        services := make(map[string][]ClearDBInfo)
-        err = json.Unmarshal([]byte(s), &services)
-        if err != nil {
-            log.Printf("Error parsing MySQL connection information: %v\n", err.Error())
+    func dbcredentials() (DB_URI string, err error){
+        s := os.Getenv("VCAP_SERVICES")
+            services := make(map[string][]ClearDBInfo)
+            err = json.Unmarshal([]byte(s), &services)
+            if err != nil {
+                log.Printf("Error parsing MySQL connection information: %v\n", err.Error())
+                return
+            }
+         
+            info := services["cleardb"]
+            if len(info) == 0 {
+                log.Printf("No ClearDB databases are bound to this application.\n")
+                return
+            }
+         
+            // Assumes only a single ClearDB is bound to this application
+            creds := info[0].Credentials
+         
+            DB_URI = creds.Uri
             return
-        }
-     
-        info := services["cleardb"]
-        if len(info) == 0 {
-            log.Printf("No ClearDB databases are bound to this application.\n")
-            return
-        }
-     
-        // Assumes only a single ClearDB is bound to this application
-        creds := info[0].Credentials
-     
-        DB_URI = creds.Uri
-        fmt.Printf(DB_URI)
-        return
-}
+    }
 
 
 func initDb() *gorp.DbMap {
-    DB_URI, err := dbcredentials()
+        DB_URI, err := dbcredentials()
 
-    re := regexp.MustCompile("mysql://")
-    rr := re.ReplaceAllLiteralString(DB_URI, "")
-    rc := regexp.MustCompile("\\?reconnect=true")
-    rx := rc.ReplaceAllLiteralString(rr, "")
-    ry := regexp.MustCompile(":3306")
-    DB_URL := ry.ReplaceAllLiteralString(rx, "")
+        re := regexp.MustCompile("mysql://")
+        rr := re.ReplaceAllLiteralString(DB_URI, "")
+        rc := regexp.MustCompile("\\?reconnect=true")
+        rx := rc.ReplaceAllLiteralString(rr, "")
+        ry := regexp.MustCompile(":3306")
+        DB_URL := ry.ReplaceAllLiteralString(rx, "")
 
-    fmt.Printf(DB_URL)
-    // db, err := sql.Open("mysql", "root:@/go_sample")
-	//  db, err := sql.Open("mysql", os.Getenv("DB_URL"))
-	  db, err := sql.Open("mysql", DB_URL)
+	db, err := sql.Open("mysql", DB_URL)
     PanicIf(err)
 
     dbmap := &gorp.DbMap{Db: db, Dialect: gorp.MySQLDialect{"InnoDB", "UTF8"}}
