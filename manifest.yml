@@ -5,6 +5,6 @@ applications:
   instances: 1
   path: .
   timeout: 180
-  command: go install && ./cf-example-go
+#  command: go install && ./cf-example-go
   services:
   - mysql-go
