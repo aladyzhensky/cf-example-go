@@ -1,6 +1,6 @@
 {
-	"ImportPath": "github.com/mgarciap/cf-example-go",
-	"GoVersion": "go1.2.1",
+	"ImportPath": "github.com/gfoligna/go-sample-cf",
+	"GoVersion": "go1.3.3",
 	"Deps": [
 		{
 			"ImportPath": "github.com/codegangsta/inject",
