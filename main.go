@@ -14,6 +14,7 @@ import (
 	"log"
         "fmt"
         "encoding/json"
+        "regexp"
 )
 
 type Book struct {
@@ -92,15 +93,25 @@ func dbcredentials() (DB_URI string, err error){
         creds := info[0].Credentials
      
         DB_URI = creds.Uri
+        fmt.Printf(DB_URI)
         return
 }
 
 
 func initDb() *gorp.DbMap {
     DB_URI, err := dbcredentials()
+
+    re := regexp.MustCompile("mysql://")
+    rr := re.ReplaceAllLiteralString(DB_URI, "")
+    rc := regexp.MustCompile("\\?reconnect=true")
+    rx := rc.ReplaceAllLiteralString(rr, "")
+    ry := regexp.MustCompile(":3306")
+    DB_URL := ry.ReplaceAllLiteralString(rx, "")
+
+    fmt.Printf(DB_URL)
     // db, err := sql.Open("mysql", "root:@/go_sample")
 	//  db, err := sql.Open("mysql", os.Getenv("DB_URL"))
-	  db, err := sql.Open("mysql", DB_URI)
+	  db, err := sql.Open("mysql", DB_URL)
     PanicIf(err)
 
     dbmap := &gorp.DbMap{Db: db, Dialect: gorp.MySQLDialect{"InnoDB", "UTF8"}}

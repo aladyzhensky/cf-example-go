@@ -1,10 +1,10 @@
 ---
 applications:
 - name: cf-example-gogogo
-  memory: 128M
+  memory: 256M
   instances: 1
   path: .
-  env:
-    PORT: 80
+  timeout: 180
+  command: go install && ./cf-example-go
   services:
-    - go-mysql
+  - mysql-go
