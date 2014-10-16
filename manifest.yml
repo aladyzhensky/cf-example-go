@@ -1,12 +1,9 @@
 ---
 applications:
 - name: go-sample-cf
-  memory: 256M
+  memory: 128M
   instances: 1
   path: .
   timeout: 180
-#  command: go build && ./go-sample-cf
   services:
   - mysql-go
-#  env:
-#    PORT: 8080
