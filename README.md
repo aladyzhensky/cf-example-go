@@ -11,6 +11,7 @@ As a Cloud Foundry evaluator, I would like to try the Go Lang buildpack [1] with
 * GORM (github.com/coopernurse/gorp)
 * MySQL
 
+> Example based on https://gophercasts.io/
 
 
 ## Cloud Foundry documentation
