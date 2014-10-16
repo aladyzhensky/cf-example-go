@@ -109,8 +109,6 @@ func initDb() *gorp.DbMap {
         rg := regexp.MustCompile("@")
         DB_URL := rg.ReplaceAllLiteralString(rf, "@tcp(")
 
-    fmt.Printf(DB_URL)
-
 	db, err := sql.Open("mysql", DB_URL)
     PanicIf(err)
 
