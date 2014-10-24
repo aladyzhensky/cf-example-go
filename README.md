@@ -13,6 +13,7 @@ As a Cloud Foundry evaluator, I would like to try the Go Lang buildpack [1] with
 
 > Example based on https://gophercasts.io/
 
+NOTE: it only works in run.pivotal.io public PaaS given that it uses 'cleardb' service. This can be very easily changed (recommendation: use an Environment variable)
 
 ## Cloud Foundry documentation
 
