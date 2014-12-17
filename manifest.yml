@@ -1,10 +1,10 @@
 ---
 applications:
-- name: go-sample-cf
+- name: cf-example-go
   memory: 128M
   instances: 1
   domain: cfapps.io
-  host: cf-example-go-${random word}
+  host: cf-example-go-${random-word}
   path: .
   timeout: 180
   services:
