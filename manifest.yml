@@ -6,6 +6,5 @@ applications:
   domain: cfapps.io
   host: cf-example-go-${random-word}
   path: .
-  timeout: 180
   services:
   - mysql-go
