@@ -17,7 +17,10 @@ import (
         "regexp"
 )
 
+const (
+HostVar = "VCAP_APP_HOST"
 PortVar = "VCAP_APP_PORT"
+)
 
 type Book struct {
 	Id 					int64 `db:"book_id"`
