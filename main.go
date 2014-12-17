@@ -17,6 +17,8 @@ import (
         "regexp"
 )
 
+PortVar = "VCAP_APP_PORT"
+
 type Book struct {
 	Id 					int64 `db:"book_id"`
 	Title       string
@@ -47,7 +49,7 @@ func main() {
 	m.Get("/create", NewBooks)
 
       fmt.Println("listening...")
-      err := http.ListenAndServe(":"+os.Getenv("VCAP_APP_PORT"), m)
+      err := http.ListenAndServe(":"+os.Getenv(PortVar), m)
       PanicIf(err)
     }
 
