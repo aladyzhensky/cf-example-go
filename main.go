@@ -47,7 +47,7 @@ func main() {
 	m.Get("/create", NewBooks)
 
       fmt.Println("listening...")
-      err := http.ListenAndServe(":"+os.Getenv("PORT"), m)
+      err := http.ListenAndServe(":"+os.Getenv("VCAP_APP_PORT"), m)
       PanicIf(err)
     }
 
