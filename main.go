@@ -19,7 +19,7 @@ import (
 
 const (
 HostVar = "VCAP_APP_HOST"
-PortVar = "VCAP_APP_PORT"
+PortVar = "8080"
 )
 
 type Book struct {
@@ -52,7 +52,7 @@ func main() {
 	m.Get("/create", NewBooks)
 
       fmt.Println("listening...")
-      err := http.ListenAndServe(":"+os.Getenv(PortVar), m)
+      err := http.ListenAndServe(PortVar, m)
       PanicIf(err)
     }
 
